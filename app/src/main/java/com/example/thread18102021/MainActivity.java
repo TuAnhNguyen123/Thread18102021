@@ -15,26 +15,20 @@ public class MainActivity extends AppCompatActivity {
         Thread threadA = new Thread(new Runnable() {
             @Override
             public void run() {
-                for(int i=0; i<100000000;i++){
-
-                }
-                Log.d("BBB","Thread A");
+                doSomeThing("A");
             }
         });
 
         Thread threadB = new Thread(new Runnable() {
             @Override
             public void run() {
-                for(int i=0; i<100000000;i++){
-
-                }
-                Log.d("BBB","Thread B");
+               doSomeThing("B");
             }
         });
         threadA.start();
         threadB.start();
 
-        CountDownTimer countDownTimer = new CountDownTimer(1000,500) {
+            new CountDownTimer(1500,10) {
             @Override
             public void onTick(long l) {
 
@@ -46,5 +40,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("BBB","State Thread B: " + threadB.getState());
             }
         }.start();
+    }
+    private synchronized void doSomeThing(String message){
+        for(int i =1; i<1000;i++){
+            Log.d("BBB", message + " : "+ i);
+        }
     }
 }
